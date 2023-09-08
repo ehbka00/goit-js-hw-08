@@ -28,7 +28,9 @@ function saveFormData(form) {
 function checkLocalStorage() {
     if (localStorage.getItem('formData')) {
        const data = JSON.parse(localStorage.getItem('formData'));
-       email.value = data.email;
-       message.value = data.message;
+    //    email.value = data.email;
+       email.value = 'email';
+       message.value = 'message';
+    //    message.value = data.message;
     }
 }
