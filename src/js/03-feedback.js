@@ -6,16 +6,7 @@ const message = form.firstElementChild.nextElementSibling.firstElementChild;
 const btn = form.lastElementChild;
 
 form.addEventListener('keydown', throttle(saveFormData,500));
-btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (!email.value || !message.value) {
-        alert('Please, fill all inputs.');
-    } else {
-        console.log(localStorage.getItem('feedback-form-state'));
-        localStorage.removeItem('feedback-form-state');
-        form.reset();
-    }
-});
+btn.addEventListener('click', handleBtn);
 
 checkLocalStorage();
 
@@ -26,6 +17,17 @@ function saveFormData(form) {
     }
 
     localStorage.setItem('feedback-form-state', JSON.stringify(data));
+}
+
+function handleBtn(e) {
+    e.preventDefault();
+    if (!email.value || !message.value) {
+        alert('Please, fill all inputs.');
+    } else {
+        console.log(localStorage.getItem('feedback-form-state'));
+        localStorage.removeItem('feedback-form-state');
+        form.reset();
+    }
 }
 
 function checkLocalStorage() {
