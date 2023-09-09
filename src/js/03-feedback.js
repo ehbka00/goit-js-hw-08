@@ -8,10 +8,13 @@ const btn = form.lastElementChild;
 form.addEventListener('keydown', throttle(saveFormData,500));
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-    form.reset();
-    if (localStorage.getItem('formData')) {
-        console.log(localStorage.getItem('formData'))
-    } 
+    if (!email.value || !message.value) {
+        alert('Please, fill all inputs.');
+    } else {
+        console.log(localStorage.getItem('feedback-form-state'));
+        localStorage.removeItem('feedback-form-state');
+        form.reset();
+    }
 });
 
 checkLocalStorage();
@@ -22,12 +25,12 @@ function saveFormData(form) {
         message: message.value
     }
 
-    localStorage.setItem('formData', JSON.stringify(data));
+    localStorage.setItem('feedback-form-state', JSON.stringify(data));
 }
 
 function checkLocalStorage() {
-    if (localStorage.getItem('formData')) {
-       const data = JSON.parse(localStorage.getItem('formData'));
+    if (localStorage.getItem('feedback-form-state')) {
+       const data = JSON.parse(localStorage.getItem('feedback-form-state'));
        email.value = data.email;
        message.value = data.message;
     }
